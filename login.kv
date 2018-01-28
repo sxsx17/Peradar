@@ -1,0 +1,133 @@
+#: kivy 1.0.9
+<LoginScreen>:
+    BoxLayout
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+        canvas:
+            Color:
+                rgba:  205/255.0, 66/255.0, 36/255.0, 1
+            Rectangle:
+                pos:self.pos
+                size: self.size
+
+
+        Label:
+            markup: True
+            text: '[color=1E1412]Peradar[/color]'#
+            size: self.texture_size
+            font_size: 40
+            bold: True
+
+        Label:
+            id: login_info
+            text: root.login_info_text
+            font_size: 20
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Usuario'
+                font_size: 18
+                halign: 'left'
+                text_size: root.width-20, 20
+                bold: True #
+
+            TextInput:
+                id: login
+                multiline:False
+                font_size: 20
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Contraseña' #
+                halign: 'left'
+                font_size: 18
+                text_size: root.width-20, 20
+                bold: True 
+
+            TextInput:
+                id: password
+                multiline:False
+                password:True
+                font_size: 28
+
+        Button:
+            text: 'Ingresar'
+            font_size: 24
+            on_press: root.changeScreen(login.text, password.text)
+
+<LoadBall>:
+    size: 25,25
+    angle: 90
+    canvas:
+        Color: 
+            rgba:  205/255.0, 66/255.0, 36/255.0, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size 
+
+<LoadScreen>:
+    ball: load_ball
+    FloatLayout:
+        id: layout
+        LoadBall:
+            id: load_ball
+            center: root.center
+            radius: root.height / 8
+            size_hint: None, None
+            
+        Label:
+            font_size: 50 
+            size_hint: None, None
+            center_x: layout.width / 2
+            center_y: layout.height / 4
+            text: "Cargando..."
+
+<InfoScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        Label:
+            text: "Selecciona el o los controles que quieras revisar en Peradar"
+            #
+            font_size: 24
+            size_hint: 1, 0.3
+
+        ListaRamosLayout:
+            id: listaRamos_layout
+            size_hint: 1, 0.6
+            orientation: 'vertical'               
+
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: 'horizontal'
+            Button:
+                on_press: root.manager.current= 'login'
+                text: 'Atras'
+                font_size: 28
+                color: (.75,.75,.75,1) # light grey
+                size_hint: 0.3,1
+            Button:
+                text: 'Siguiente'
+                font_size: 28
+                color: (.75, .75, .75, 1)
+                size_hint: 0.7,1
+
+<RamoLayout>:
+    orientation: 'horizontal'
+    spacing: 20
+    Label:
+        font_size: 26
+        size_hint: 0.4, 1
+        text: self.parent.ramo_name
+    ControlesLayout:
+        id: controles_layout
+        orientation: 'horizontal'
+        size_hint: 0.6, 1
+        
+
+#cosas que cambie con '#' lo demas lo agregue
